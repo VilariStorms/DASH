@@ -1,5 +1,5 @@
-
 import std.stdio;
+
 void init_shell()
 {
     writeln("Welcome to DASH!");
@@ -9,10 +9,11 @@ void init_shell()
     writeln();
     writeln();
 }
+
 void main() {
     init_shell();
     while (true) {
-      write("$ ");
+        write("$ ");
         string input = readln();
         if (input == "help") {
             writeln("help - print this message");
