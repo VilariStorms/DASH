@@ -22,12 +22,12 @@ void init_shell()
   writeln();
 }
 
-int builtin_cd(string[] args)
+void builtin_cd(string[] args)
 {
   if (args.length == 0)
   {
     writeln("dash: expected argument to \"cd\"");
-    return 1;
+    return;
   }
   string path = args[0];
   try
@@ -37,13 +37,9 @@ int builtin_cd(string[] args)
   catch (FileException e)
   {
     writeln("dash: no such file or directory: ", path);
-    return 1;
+    return;
   }
-  return 0;
-
-  //if (chdir(path) != 0) {
-  //   writeln("dash: no such file or directory: ", path);
-  //}
+  return; 
 }
 
 int builtin(string[] args)
@@ -73,13 +69,19 @@ void parse_command(string input)
 {
   string[] args = input.split();
   // check if builtin    
-  if (builtin(args) == 0)
-  {
-    return;
-  }
-  auto pid = spawnProcess(args);
-  pid.wait();
+  if (builtin(args) == 0){return;}
 
+  // check if executable
+  try
+  {
+    auto pid = spawnProcess(args);
+    pid.wait();
+  }
+  catch (ProcessException e)
+  {
+    writefln("dash: command: %s, not found!", args);
+    return;
+  }  
   return;
 }
 
