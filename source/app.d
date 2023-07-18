@@ -37,7 +37,7 @@ int builtin_cd(string[] args)
   catch (FileException e)
   {
     writeln("dash: no such file or directory: ", path);
-    return 1; 
+    return 1;
   }
   return 0;
 
@@ -77,11 +77,9 @@ void parse_command(string input)
   {
     return;
   }
-  // fork and exec
-  if (execv(args[0], args) == -1)
-  {
-    writeln("dash: command not found: ", args[0]);
-  }
+  auto pid = spawnProcess(args);
+  pid.wait();
+
   return;
 }
 
