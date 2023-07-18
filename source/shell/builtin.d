@@ -17,7 +17,7 @@ void builtin_cd(string[] args) {
         writeln("dash: no such file or directory: ", path);
         return;
     }
-    
+
     return; 
 }
 
@@ -30,15 +30,15 @@ int builtin_handler(string[] args) {
 
     switch (cmd) {
         case "cd":
-        builtin_cd(args[1 .. $]);
-        return 0;
-    case "help":
-        writeln("DASH - D Programming Language Shell");
-        writeln("Written by: XDRC");
-        return 0;
-    case "exit":
-        exit(0);
-    default:
-        return 1;
-    }
+            builtin_cd(args[1 .. $]);
+            return 0;
+        case "help":
+            writeln("DASH - D Programming Language Shell");
+            writeln("Written by: XDRC");
+            return 0;
+        case "exit":
+            exit(0);
+        default:
+            return 1;
+        }
 }

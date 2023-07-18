@@ -3,18 +3,19 @@ import std.process;
 import std.array;
 import builtin;
 
-void parse_command(string input) {
+int parse_command(string input) {
     string[] args = input.split();
+    int exit_code;
     // check if builtin    
-    if (builtin_handler(args) == 0){return;}
+    if (builtin_handler(args) == 0) { return 0; }
 
     // check if executable
     try {
         auto pid = spawnProcess(args);
-        pid.wait();
+        exit_code = pid.wait();
     } catch (ProcessException e) {
         writefln("dash: command: %s, not found!", args);
-        return;
+        return 1;
     }  
-    return;
+    return exit_code;
 }
