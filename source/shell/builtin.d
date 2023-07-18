@@ -22,9 +22,7 @@ void builtin_cd(string[] args) {
 }
 
 int builtin_handler(string[] args) {
-    if (args.length == 0) {
-        return 1;
-    }
+    if (args.length == 0) return 1;
 
     string cmd = args[0];
 
