@@ -98,7 +98,7 @@ void main() {
 
         write(prompt);
         readf("%s\n", &input);
-
+        // split input into an array
         string[] input_arr = input.split;
         if (input_arr.length == 0) {
             continue;
