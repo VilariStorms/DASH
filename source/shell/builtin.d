@@ -62,11 +62,6 @@ void colour(string[] args)
   }
 }
 
-void handle_alias(string[] args){
-  // TODO: Implement alias
-  writeln("dash: alias not implemented yet");
-  return;
-}
 
 int builtin_handler(string[] args)
 {
@@ -86,17 +81,11 @@ int builtin_handler(string[] args)
     writeln("DASH - D Programming Language Shell");
     writeln("Written by: XDRC");
     return 0;
-  case "alias":
-    if (args.length == 1){
-      writeln("dash: expected argument to \"alias\"");
-      return 0;
-    }
-    handle_alias(args);
-    return 0;
   case "exit":
     exit(0);
   case "colour":
-    if (args.length == 1){
+    if (args.length == 1)
+    {
       writeln("dash: expected argument to \"colour\"");
       return 0;
     }
@@ -106,4 +95,3 @@ int builtin_handler(string[] args)
     return 1;
   }
 }
-

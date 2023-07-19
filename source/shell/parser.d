@@ -3,10 +3,9 @@ import std.process;
 import std.array;
 import builtin;
 
-int parse_command(string input) {
-    if (input == "") { return 0; }
+int parse_command(string[] args) {
+    if (args[0] == "") { return 0; }
     
-    string[] args = input.split();
     int exit_code;
     // check if builtin    
     if (builtin_handler(args) == 0) { return 0; }

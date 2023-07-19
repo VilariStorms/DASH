@@ -5,6 +5,7 @@
 import std.stdio;
 import std.format;
 import std.file;
+import std.array;
 import std.path;
 import std.socket;
 import builtin;
@@ -19,12 +20,6 @@ int firstime(){
 int readconfig(){
   return 0;
 }
-
-int aliases(string[] args){
-  
-  return 1;
-}
-
 
 int startup(){
   // check if ~/.dash_shell exists
@@ -44,6 +39,27 @@ int startup(){
 
 }
 
+void handle_alias(string[] args, string[string] dash_aliases){
+  if (args.length != 3)
+  {
+    writeln("dash: alias: wrong number of arguments");
+    writeln("alias: usage: alias [name] [command]");
+    return;
+  }
+  string name = args[1];
+  string command = args[2];
+  // check if alias already exists
+  if ((name in dash_aliases) != null)
+  {
+    writeln("dash: alias already exists: ", name);
+    return; 
+  }
+  dash_aliases[name] = command;
+  return;
+}
+
+
+
 void welcome_message() {
     writeln("Welcome to DASH!");
     writeln("Type 'help' to get started.");
@@ -55,7 +71,7 @@ void welcome_message() {
 void main() {
     welcome_message();
     int prev_exit_code;
-    auto default_aliases = ["l": "ls -la", "ll": "ls -l", "q": "exit", "c": "clear"];
+    auto dash_aliases = ["l": "ls -la", "ll": "ls -l", "q": "exit", "c": "clear"];
     switch (startup)   {
       case 0:
         writeln("Startup successful!");
@@ -82,10 +98,26 @@ void main() {
 
         write(prompt);
         readf("%s\n", &input);
-        // check for aliases
-        if ((input in default_aliases) != null) {
-          input = default_aliases[input];
+
+        string[] input_arr = input.split;
+        if (input_arr.length == 0) {
+            continue;
         }
-        prev_exit_code = parse_command(input);
+
+        // check if we are setting an alias
+        if (input_arr[0] == "alias") {
+          handle_alias(input_arr, dash_aliases);
+          continue;
+        }
+        // Loop through input_arr and replace aliases
+        for (int i = 0; i < input_arr.length; i++) {
+          if ((input_arr[i] in dash_aliases) != null) {
+            // split the alias into an array in case it has multiple arguments
+            string[] alias_arr = dash_aliases[input_arr[i]].split;
+            // replace the alias with the command and add the arguments if any - insering at the index of the alias
+            input_arr = input_arr[0 .. i] ~ alias_arr ~ input_arr[i + 1 .. $];
+          }
+        }
+        prev_exit_code = parse_command(input_arr);
     }
 }
