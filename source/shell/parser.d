@@ -10,7 +10,6 @@ int parse_command(string input) {
     int exit_code;
     // check if builtin    
     if (builtin_handler(args) == 0) { return 0; }
-
     // check if executable
     try {
         auto pid = spawnProcess(args);
