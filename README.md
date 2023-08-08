@@ -36,7 +36,7 @@ sudo apt-get update
 
 ### Install with apt
 ```
-sudo apt install cumsay
+sudo apt install dash-shell
 ```
 
 # To build from source:
