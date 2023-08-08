@@ -21,6 +21,25 @@ Dick ass shell can do anything that your shell can do, as long as you don't expe
 ## Installation and use.
 
 ~~uhhhh, just use dub, I haven't got round to packaging it yet.~~
+## For Debian and Debian based distros like Ubuntu, Mint, etc
+
+### Download the GPG key
+```
+curl -sSL http://apt.vilari.site/cum/apt-repo/deriv-archive-keyring.pgp | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/cumsay.gpg >/dev/null
+```
+### Add repository to the apt sources list
+```
+echo "deb http://apt.vilari.site/cum/apt-repo/ stable main" | sudo tee /etc/apt/sources.list.d/cumsay.list
+```
+### Update the apt package index
+sudo apt-get update
+
+### Install with apt
+```
+sudo apt install cumsay
+```
+
+# To build from source:
 
 - Install dub - the D language build system and dependency manager
 - git clone the repo
