@@ -4,9 +4,9 @@
 	],
 	"copyright": "Lol no",
 	"dependencies": {
-	
-    },
+		"dyaml": "~>0.9.2"
+	},
 	"description": "DICK ASS SHELL",
 	"license": "custom",
-	"name": "dash"
+	"name": "dash-shell"
 }
