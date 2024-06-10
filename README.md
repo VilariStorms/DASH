@@ -8,6 +8,7 @@ Dick ass shell can do anything that your shell can do, as long as you don't expe
 - It's written in D
 - Sparkster wrote the code
 - It's very homosexual
+- Approved and tested by femboys for femboys
 
 
 ## Todo
